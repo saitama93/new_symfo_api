@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -23,12 +24,16 @@ class Post
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("post:read")
+     * @Assert\NotBlank(message="Le titre du post ne peut etre vide")
+     * @Assert\Length(min=3)
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Groups("post:read")
+     * @Assert\NotBlank(message="Le contenu du post ne peut etre vide")
+     * @Assert\Length(min=3)
      */
     private $content;
 
